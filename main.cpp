@@ -296,9 +296,50 @@ void humanFuncRemove(float humanx,float humany)
     glVertex3f(humanx-80.0,humany-38.0,0.0);
     glEnd();
 }
+int i=0,j=0,i1=0,j11=0;
+void motion2(int value){
+
+
+
+
+ humanFuncRemove(80+j11,90-j);
+ if(j>=30 && j11<=15)
+    j11++;
+ if(j<30)
+j++;
+ humanFunc(80+j11,90-j);
+
+            glutTimerFunc(100,motion2,0);
+            glutPostRedisplay();
+            }
+void motion1(int value){
+
+
+
+
+ humanFuncRemove(80-i1,90-i);
+
+
+if(i>=52 &&i1<=5 )
+    i1++;
+if(i<52)
+    i++;
+
+
+ humanFunc(80-i1,90-i);
+
+
+if(i==40) motion2(1000);
+            glutTimerFunc(100,motion1,0);
+
+            glutPostRedisplay();
+            }
+
 void moving(){
 
 X=X+1;
+
+
     glColor3f(223.0f/255.0f, 255.0f/255.0f, 216.0f/255.0f);
      glBegin(GL_QUADS);             // draw a quadrilateral
         glVertex2f(X, 50);
@@ -407,27 +448,37 @@ glBegin(GL_QUADS);             // draw a quadrilateral
 
 }
 
+bool move1=false;
 void keyboardCallback(unsigned char key, int x, int y) {
     if (key == 32) {
             // ASCII code for space key
- humanFuncRemove(80-L+R,90-D+U);
- D++;
- humanFunc(80-L+R,90-D+U);
+           if(move1==false){
+           motion1(1000);
+           move1=true;
+           }
+           if(move1==true){
+            humanFuncRemove(30-L+R,85-D+U);
+            D++;
+            waiterFunc(30-L+R,85-D+U);
+           }
+
     }
+
     if(key == 13){
-        humanFuncRemove(80-L+R,90-D+U);
+        humanFuncRemove(30-L+R,85-D+U);
         L++;
-        humanFunc(80-L+R,90-D+U);
+        waiterFunc(30-L+R,85-D+U);
     }    if(key == 9){
-        humanFuncRemove(80-L+R,90-D+U);
+        humanFuncRemove(30-L+R,85-D+U);
         R++;
-        humanFunc(80-L+R,90-D+U);
+        waiterFunc(30-L+R,85-D+U);
     }if(key == 8){
-        humanFuncRemove(80-L+R,90-D+U);
+        humanFuncRemove(30-L+R,85-D+U);
         U++;
-        humanFunc(80-L+R,90-D+U);
+        waiterFunc(30-L+R,85-D+U);
     }
 }
+
 
 void Line(float x0,float y0,float x1,float y1){
 
@@ -437,7 +488,7 @@ void Line(float x0,float y0,float x1,float y1){
   glVertex2f(x1, y1);
     glEnd();}
 
-void Display()
+void display()
 {
    glColor3f(1.0f, 1.0f, 1.0f);  // Set the text color
 
@@ -483,9 +534,106 @@ void Display()
     Line(-15,75,-15,50);
     Line(15,75,15,50);
 
-waiterFunc(100,60);
 
 
+//waiterFunc(100,60);
+
+
+    glFlush();
+
+    glutPostRedisplay();
+}
+
+
+
+
+
+void newdisp()
+{ char* message="Welcome to our restaurant";
+
+
+
+
+
+
+
+    glutInitWindowPosition(10,10);
+    glutInitWindowSize(500,500);
+    glutCreateWindow("TEXT_DISPLAY");
+    glClearColor(223.0f/255.0f, 255.0f/255.0f, 216.0f/255.0f,1.0);
+    glMatrixMode(GLUT_SINGLE|GLUT_RGB);
+    glLoadIdentity();
+    glOrtho(-90.0,100.0,-15.0,100.0,0.0,1.0);
+
+    glutDisplayFunc(display);
+    glutMouseFunc(ButtonCallBack);
+    glutKeyboardFunc(keyboardCallback);
+    glutMainLoop();
+
+}
+
+void ButtonCallBack1(int button,int state,int x,int y)
+{
+    if(button==GLUT_LEFT_BUTTON && state==GLUT_DOWN)
+    {
+        //if(y <= 380 && y>=310 && x>=530 && x>=580)
+       // if(x>=630 && x<=750 )
+       if(y>=430 && y<=500)
+        {
+        glutCreateWindow("NEW_WINDOW");
+        glutDisplayFunc(newdisp);
+        }
+    glutPostRedisplay();
+    }
+}
+
+
+
+void Display()
+{
+    glColor3f(0.0f, 0.0f, 0.0f);  // Set the text color
+
+   char* rest = "THE IMPERIAL";
+    char* name="Name";
+    char* usn="USN";
+    char* amith="Amith Jagannath Soorenji";
+    char* adarsh="Adarsh J Shetty";
+    char* usn23="4NM20CS023";
+    char* usn10="4NM20CS010";
+    char* next ="Next";
+    char* sir="Under the guidance of Dr Pradeep Kanchan and Mr Puneet RP";
+
+         glRasterPos2f(-9.0f, 80.0f);
+          displayString(rest);
+
+
+      glRasterPos2i(-45.0f,70.0f);
+       displayString(name);
+    glRasterPos2i(40.0f,70.0f);
+   displayString(usn);
+    glRasterPos2i(-55.0f,62.0f);
+    displayString(amith);
+    glRasterPos2i(-55.0f,54.0f);
+    displayString(adarsh);
+     glRasterPos2i(34.0f,62.0f);
+   displayString(usn23);
+     glRasterPos2i(34.0f,54.0f);
+    displayString(usn10);
+    glRasterPos2i(-35.0f,46.0f);
+    displayString(sir);
+    glColor3f(0.6f, 9.0f, 8.0f);
+    glPushMatrix();
+    glRectf(-10,35,5,28);
+   glColor3f(0.0f, 0.0f, 0.4f);//Text color of "NEXT"
+
+    glRasterPos2f(-6.0f, 30.0f);
+    for (int i = 0; i < strlen(next); i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, next[i]);
+    }
+
+
+    glEnd();
     glFlush();
     glutPostRedisplay();
 }
@@ -495,15 +643,13 @@ int main(int argc,char **argv)
     glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
     glutInitWindowPosition(10,10);
-    glutInitWindowSize(500,500);
+    glutInitWindowSize(1500,1500);
     glutCreateWindow("TEXT_DISPLAY");
     glClearColor(223.0f/255.0f, 255.0f/255.0f, 216.0f/255.0f,1.0);
     glMatrixMode(GLUT_SINGLE|GLUT_RGB);
     glLoadIdentity();
     glOrtho(-90.0,100.0,-15.0,100.0,0.0,1.0);
-
     glutDisplayFunc(Display);
-    glutMouseFunc(ButtonCallBack);
-    glutKeyboardFunc(keyboardCallback);
+    glutMouseFunc(ButtonCallBack1);
     glutMainLoop();
 }
