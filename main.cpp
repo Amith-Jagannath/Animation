@@ -320,7 +320,7 @@ void motion1(int value){
  humanFuncRemove(80-i1,90-i);
 
 
-if(i>=52 &&i1<=5 )
+if(i>=52 &&i1<=10 )
     i1++;
 if(i<52)
     i++;
@@ -487,7 +487,40 @@ void Line(float x0,float y0,float x1,float y1){
   glVertex2f(x0,y0);
   glVertex2f(x1, y1);
     glEnd();}
+void chair(float x0,float y0,int flag){
+    int c=0;
+    if(flag==1) c=-6.5;
+      glBegin(GL_QUADS);             // draw a quadrilateral
+        glVertex2f(-8+x0, 2+y0);
+        glVertex2f(-6.5+x0, 6+y0);
+        glVertex2f(0+x0, 6+y0);
+        glVertex2f(-1.5+x0, 2+y0);
+    glEnd();
+     glBegin(GL_QUADS);           // draw a quadrilateral
+        glVertex2f(0+x0+c, 6+y0);
+        glVertex2f(-1.5+x0+c, 2+y0);
+         glVertex2f(-1.5+x0+c, 10+y0);
+        glVertex2f(0+x0+c, 13+y0);
 
+    glEnd();
+    glColor3f(0.0, 0.0, 0.0); // set color to green
+    glLineWidth(5.0); // set line width to 5 pixels
+    glBegin(GL_LINES);
+        glVertex3f(-7+x0, 2.0+y0, 0.0); // start point
+        glVertex3f(-7+x0, -4.0+y0, 0.0); // end point
+    glEnd();
+        glBegin(GL_LINES);
+        glVertex3f(-5+x0, 6.0+y0, 0.0); // start point
+        glVertex3f(-5+x0, -2.0+y0, 0.0); // end point
+    glEnd();
+    glBegin(GL_LINES);
+        glVertex3f(-.5+x0, 6.0+y0, 0.0); // start point
+        glVertex3f(-.5+x0, -2.0+y0, 0.0); // end point
+    glEnd();
+    glBegin(GL_LINES);
+        glVertex3f(-2.5+x0, 2.0+y0, 0.0); // start point
+        glVertex3f(-2.5+x0, -4.0+y0, 0.0); // end point
+    glEnd();}
 void display()
 {
    glColor3f(1.0f, 1.0f, 1.0f);  // Set the text color
@@ -535,8 +568,22 @@ void display()
     Line(15,75,15,50);
 
 
+   chair(0,0,0);
+   chair(-60,0,1);
+   chair(80,0,0);
+   chair(20,0,1);
+   chair(-5,30,0);
+   chair(-60,30,1);
+   chair(28,28,1);
 
-//waiterFunc(100,60);
+
+
+                 // draw a quadrilateral
+
+
+
+
+waiterFunc(150,45);
 
 
     glFlush();
@@ -601,16 +648,15 @@ void Display()
     char* usn23="4NM20CS023";
     char* usn10="4NM20CS010";
     char* next ="Next";
-    char* sir="Under the guidance of Dr Pradeep Kanchan and Mr Puneet RP";
+    char* under="Under the guidance of";
+    char* pra="Dr Pradeep Kanchan";
+    char* pu="Mr Puneet RP";
 
-         glRasterPos2f(-9.0f, 80.0f);
+         glRasterPos2f(-9.0f, 75.0f);
           displayString(rest);
 
 
-      glRasterPos2i(-45.0f,70.0f);
-       displayString(name);
-    glRasterPos2i(40.0f,70.0f);
-   displayString(usn);
+
     glRasterPos2i(-55.0f,62.0f);
     displayString(amith);
     glRasterPos2i(-55.0f,54.0f);
@@ -619,8 +665,12 @@ void Display()
    displayString(usn23);
      glRasterPos2i(34.0f,54.0f);
     displayString(usn10);
-    glRasterPos2i(-35.0f,46.0f);
-    displayString(sir);
+    glRasterPos2i(-13.0f,46.0f);
+    displayString(under);
+     glRasterPos2i(-55.0f,38.0f);
+    displayString(pra);
+     glRasterPos2i(34.0f,38.0f);
+    displayString(pu);
     glColor3f(0.6f, 9.0f, 8.0f);
     glPushMatrix();
     glRectf(-10,35,5,28);
