@@ -190,6 +190,17 @@ void servingFunc(float humanx,float humany)
     glVertex3f(humanx-77.0,humany-28.0,0);
     glVertex3f(humanx-83.0,humany-28.0,0.0);
     glEnd();
+    //coffee
+
+
+    glColor3f(0,0,0);
+     glBegin(GL_QUADS);
+    glVertex3f(humanx-80.5,humany-26.0,0.0);
+    glVertex3f(humanx-79.5,humany-26.0,0);
+    glVertex3f(humanx-79.5,humany-23.5,0);
+     glVertex3f(humanx-80.5,humany-23.5,0.0);
+    glEnd();
+
 
 //man pant
     glBegin(GL_QUADS);
@@ -214,7 +225,103 @@ void servingFunc(float humanx,float humany)
     glVertex3f(humanx-80.0,humany-38.0,0.0);
     glEnd();
 }
+void NonservingFunc(float humanx,float humany)
+{
+        //MAN LEFT
+//man head
+       glColor3f(1, 0.76, 0.41);
+    sunFunc(1.5,1.5,humanx-80.0,humany-20.5);
 
+//main hair
+    glColor3f(0,0,0);
+    glBegin(GL_QUADS);
+    glVertex2f(humanx-81.25,humany-19.25);
+    glVertex2f(humanx-81.25,humany-18);
+    glVertex2f(humanx-78.75,humany-18);
+    glVertex2f(humanx-78.75,humany-19.25);
+    glEnd();
+
+//man eyes
+    glColor3f(0,0,0);
+    glPointSize(2);
+    glBegin(GL_POINTS);
+    glVertex2f(humanx-80.75,humany-20);
+    glVertex2f(humanx-79.25,humany-20);
+    glEnd();
+
+//mans  mouth
+    glLineWidth(0.5f);
+    glBegin(GL_LINES);
+    glVertex2f(humanx-80.75,humany-21.5);
+    glVertex2f(humanx-79.25,humany-21.5);
+    glEnd();
+
+//man chest
+    glBegin(GL_QUADS);
+       glColor3f(1, 0.76, 0.41);
+    glVertex3f(humanx-83.0,humany-22.0,0);
+    glVertex3f(humanx-77.0,humany-22.0,0.0);
+    glVertex3f(humanx-77.0,humany-28.0,0);
+    glVertex3f(humanx-83.0,humany-28.0,0.0);
+    glEnd();
+//man t-shirt
+    glColor3f(1.0f, 1.0f, 1.0f); //blue
+    glBegin(GL_QUADS);
+    glVertex3f(humanx-82.0,humany-22.0,0);
+    glVertex3f(humanx-78.0,humany-22.0,0.0);
+    glVertex3f(humanx-78.0,humany-28.0,0);
+    glVertex3f(humanx-82.0,humany-28.0,0.0);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glVertex3f(humanx-83.0,humany-22.0,0);
+    glVertex3f(humanx-82.0,humany-22.0,0.0);
+    glVertex3f(humanx-82.0,humany-24.0,0);
+    glVertex3f(humanx-83.0,humany-24.0,0.0);
+    glEnd();
+
+    glBegin(GL_QUADS);
+    glVertex3f(humanx-77.0,humany-22.0,0);
+    glVertex3f(humanx-78.0,humany-22.0,0.0);
+    glVertex3f(humanx-78.0,humany-24.0,0);
+    glVertex3f(humanx-77.0,humany-24.0,0.0);
+    glEnd();
+    //tray
+    glColor3f(1,0,0);
+   glBegin(GL_QUADS);
+    glVertex3f(humanx-83.0,humany-26.0,0);
+    glVertex3f(humanx-77.0,humany-26.0,0.0);
+    glVertex3f(humanx-77.0,humany-28.0,0);
+    glVertex3f(humanx-83.0,humany-28.0,0.0);
+    glEnd();
+    //coffee
+
+
+
+
+//man pant
+    glBegin(GL_QUADS);
+       glColor3f(0.0, 0.0, 0.0);
+    glVertex3f(humanx-82.0,humany-28.0,0);
+    glVertex3f(humanx-78.0,humany-28.0,0.0);
+    glVertex3f(humanx-78.0,humany-35.0,0);
+    glVertex3f(humanx-82.0,humany-35.0,0.0);
+    glEnd();
+//man legs
+    glBegin(GL_QUADS);
+       glColor3f(1, 0.76, 0.41);
+    glVertex3f(humanx-81.5,humany-35.0,0);
+    glVertex3f(humanx-78.5,humany-35.0,0.0);
+    glVertex3f(humanx-78.5,humany-38.0,0);
+    glVertex3f(humanx-81.5,humany-38.0,0.0);
+    glEnd();
+//man leg divider
+    glBegin(GL_LINES);
+       glColor3f(0.0, 0.0, 0);
+    glVertex3f(humanx-80.0,humany-32.0,0);
+    glVertex3f(humanx-80.0,humany-38.0,0.0);
+    glEnd();
+}
 
 
 
@@ -542,7 +649,7 @@ X=X+1;
     glEnd();
 
      glColor3f(158.0f/255.0f, 118.0f/255.0f, 118.0f/255.0f);
-     glBegin(GL_QUADS);             // draw a quadrilateral
+    glBegin(GL_QUADS);             // draw a quadrilateral
         glVertex2f(-15, 50);
         glVertex2f(-15, 75);
         glVertex2f(0-X, 75);
@@ -553,15 +660,42 @@ X=X+1;
 
 }
 int ser =0;
+void serverMovingBack(int val){
+humanFuncRemove(ser,41);
+ser--;
+NonservingFunc(ser,41);
+if(ser>=0){
+glutTimerFunc(100,serverMovingBack,0);
+}
+glutPostRedisplay();
+
+}
+void displayCoffe(){
+   glColor3f(0,0,0);
+     glBegin(GL_QUADS);
+    glVertex2f(35.0,9.0);
+     glVertex2f(36.5,9.0);
+      glVertex2f(36.5,14.0);
+       glVertex2f(35.0,14.0);
+    glEnd();
+    //NonservingFunc(120,41);
+    glutTimerFunc(100,serverMovingBack,0);
+
+}
+
+
 void servingDisplay(int value){
 humanFuncRemove(ser,41);
 ser++;
    servingFunc(ser,41);
-   if(ser<120){
+   if(ser<110){
    glutTimerFunc(100,servingDisplay,0);
 
             glutPostRedisplay();
 
+   }
+   else{
+    displayCoffe();
    }
 
 
@@ -826,7 +960,7 @@ glBegin(GL_QUADS);
    chair(20,0,1);
    chair(-5,30,0);
    //chair(-60,30,1);
-   chair(28,28,1);
+   chair(20,28,1);
 
 
 
@@ -893,7 +1027,7 @@ void Display()
 {
     glColor3f(0.0f, 0.0f, 0.0f);  // Set the text color
 
-   char* rest = "THE IMPERIAL";
+   char* rest = "FOOD COURT";
     char* name="Name";
     char* usn="USN";
     char* amith="Amith Jagannath Soorenji";
@@ -904,6 +1038,8 @@ void Display()
     char* under="Under the guidance of";
     char* pra="Dr Pradeep Kanchan";
     char* pu="Mr Puneet RP";
+    char* desc1="Assistant Professor GD-III";
+    char* desc2="Assistant Professor GD-II";
 
          glRasterPos2f(-9.0f, 75.0f);
           displayString(rest);
@@ -922,8 +1058,14 @@ void Display()
     displayString(under);
      glRasterPos2i(-55.0f,38.0f);
     displayString(pra);
+
+    glRasterPos2i(-55.0f,30.0f);
+    displayString(desc1);
      glRasterPos2i(34.0f,38.0f);
+
     displayString(pu);
+     glRasterPos2i(34.0f,30.0f);
+    displayString(desc2);
     glColor3f(0.6f, 9.0f, 8.0f);
     glPushMatrix();
     glRectf(-10,35,5,28);
