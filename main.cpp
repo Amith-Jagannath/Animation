@@ -584,15 +584,19 @@ void humanFuncRemove(float humanx,float humany)
 int i=0,j=0,i1=0,j11=0;
 void motion2(int value){
 
+int t=0;
 
 
-
- humanFuncRemove(80+j11,90-j);
- if(j>=30 && j11<=15)
+ humanFuncRemove(80-j11,90-j);
+ if(j>=21 && j11<=9)
     j11++;
- if(j<30)
+
+    t=1;
+ if(j<21)
 j++;
- humanFunc(80+j11,90-j);
+
+
+ humanFunc(80-j11,90-j);
 
             glutTimerFunc(100,motion2,0);
             glutPostRedisplay();
@@ -701,7 +705,48 @@ ser++;
 
 }
 
+void endConvoPizza(int value){
+   // glColor3f(1,1,1);
+glColor3f(223.0f/255.0f, 255.0f/255.0f, 216.0f/255.0f);
 
+char* conv1 = "Your order pls!";
+     char* conv2 = "I need Pizza";
+    glRasterPos2i(30.0f,45.0f);
+    displayString(conv1);
+    Sleep(1000);
+    glRasterPos2i(5.0f,45.0f);
+    displayString(conv2);
+}
+void convo2Pizza(int value){
+    glColor3f(1,0,0);
+    char* convo="I need a Pizza";
+ glRasterPos2i(5.0f,45.0f);
+    displayString(convo);
+    glutTimerFunc(1000,endConvoPizza,0);
+    glutPostRedisplay();
+}
+void conversationPizza(){
+
+
+/*glBegin(GL_QUADS);
+glColor3f(1,0,0);
+           glVertex2f(-45, 25);
+        glVertex2f(-45, 15);
+        glVertex2f(-25, 15);
+        glVertex2f(-25, 25);
+    glEnd();*/
+    glColor3f(0,1,0);
+    char* conv1 = "Your order pls!";
+
+    glRasterPos2i(30.0f,45.0f);
+    displayString(conv1);
+
+
+    glutTimerFunc(1000,convo2Pizza,0);
+    glutPostRedisplay();
+
+
+}
 
 void ButtonCallBack(int button,int state,int x,int y)
 {
@@ -715,6 +760,9 @@ void ButtonCallBack(int button,int state,int x,int y)
     glutPostRedisplay();
     if(y>=50){
        servingDisplay(10);
+    }
+    if(x<=10){
+        conversationPizza();
     }
 
 
@@ -818,6 +866,10 @@ glColor3f(1,0,0);
 
 }
 
+
+
+
+
 bool move1=false;
 void keyboardCallback(unsigned char key, int x, int y) {
     if (key == 32) {
@@ -850,7 +902,8 @@ void keyboardCallback(unsigned char key, int x, int y) {
     if(key == 8){
 
     }
-    if(R==70){
+
+    if( D==50){
         conversation();
     }
 
@@ -971,7 +1024,8 @@ glBegin(GL_QUADS);
 
 waiterFunc(150,45);
 
-sitting(17,35);
+sitting(17,33);
+sitting(17,62);
 
     glFlush();
 
